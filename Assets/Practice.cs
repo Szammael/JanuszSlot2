@@ -19,7 +19,7 @@ class Practice : MonoBehaviour
             else
             {
                 Debug.Log("Klikk");
-                if (magazineCapacity > 0)
+                if (magazineCount > 0)
                 {
                     bulletCount = magazineCapacity;
                     magazineCount--;
