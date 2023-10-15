@@ -36,7 +36,7 @@ using UnityEngine;
         int acc = 0;
         for (int m = 1; m <= n; m++)
         {
-            acc += m;
+            acc = acc + m;
         }
         Debug.Log(acc);
     }
