@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class Autorotator : MonoBehaviour
+ class Autorotator : MonoBehaviour
 {
-    [SerializeField] float angularSpeed;
+    [SerializeField] float angularSpeed = 360;
 
     void Update()
     {
 
-        transform.Rotate(0, angularSpeed*Time.deltaTime, 0);
+        transform.Rotate(0, angularSpeed * Time.deltaTime, 0);
         
     }
 }

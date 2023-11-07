@@ -4,16 +4,18 @@ class PlayerMover : MonoBehaviour
 {
     [SerializeField] float speed;
     [SerializeField] float angularSpeed;
-
+    [SerializeField] Transform cameraTransform;
     void Update()
     {
-        
-        //Transform t = transform;
-
+       
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
-        Vector3 inputVector= new Vector3(x, 0, z);
+        Vector3 cameraForward = cameraTransform.forward;
+        Vector3 cameraRight = cameraTransform.right;
+
+        Vector3 inputVector = x * cameraRight + z * cameraForward;
+        inputVector.y = 0;
 
         if (inputVector != Vector3.zero)
         {
