@@ -1,22 +1,27 @@
 using UnityEngine;
 
-public class Collectable : MonoBehaviour
+class Collectable : MonoBehaviour
 {
-    [SerializeField] int coins = 1;
+    [SerializeField, Min(1)] int value = 1;
+    [SerializeField] Bounds teleportArea;
 
-    void OnTriggerEnter(Collider other)
+    private void OnDrawGizmos()
     {
-        GameObject go = other.gameObject;
-        Collector collector = go.GetComponent<Collector>();
-        
-        if (collector != null)
-        {
-            collector.Collection(coins);
-
-        }
-        
-
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireCube(teleportArea.center, teleportArea.size);
     }
 
+    public int GetValue()
+    {
+        return value;
+    }
 
+    public void Teleport()
+    {
+        float randomX = Random.Range(teleportArea.min.x, teleportArea.max.x);
+        float randomY = Random.Range(teleportArea.min.y, teleportArea.max.y);
+        float randomZ = Random.Range(teleportArea.min.z, teleportArea.max.z);
+
+        transform.position = new Vector3(randomX, randomY, randomZ);
+    }
 }

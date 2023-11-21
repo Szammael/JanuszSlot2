@@ -1,32 +1,32 @@
 using TMPro;
 using UnityEngine;
 
-public class Collector : MonoBehaviour
+class Collector : MonoBehaviour
 {
-    [SerializeField] int startCoins = 0;
     [SerializeField] TMP_Text uiText;
-    int currentCoins;
 
-    public int GetCurrentCoins()
-    { 
-        return currentCoins; 
-    }
+    int collectedValue = 0;
 
     void Start()
     {
-        currentCoins = startCoins;
-        UpdUIText();
+        UpdateUI();  
     }
 
-    public void Collection(int coins)
+    void OnTriggerEnter(Collider other)
     {
-        
-        currentCoins += coins;
-        UpdUIText();
+
+        Collectable collectable = other.GetComponent<Collectable>();
+        if (collectable != null)
+        {
+            collectedValue += collectable.GetValue();
+            collectable.Teleport();
+            UpdateUI();
+        }
     }
 
-    void UpdUIText()
+    void UpdateUI()
     {
-        uiText.text = currentCoins.ToString();
+        if(uiText!= null)
+        uiText.text = collectedValue.ToString();
     }
 }
