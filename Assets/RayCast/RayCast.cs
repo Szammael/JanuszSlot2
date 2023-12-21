@@ -6,6 +6,7 @@ class RayCast : MonoBehaviour
     [SerializeField] float explosionRange=2;
     [SerializeField] float maximumExplosionForce=10;
     [SerializeField] ParticleSystem visualEffect;
+    [SerializeField] AudioSource soundEffect;
     void Update()
     {
         // Ray ray = new Ray(Vector3.up, Vector3.right);
@@ -30,6 +31,8 @@ class RayCast : MonoBehaviour
     void Explode(Vector3 position)
     {
         visualEffect.Play();
+        soundEffect.Play();
+
         Rigidbody[] allRigidBodies =FindObjectsOfType<Rigidbody>();
        foreach (Rigidbody rb in allRigidBodies)
         {

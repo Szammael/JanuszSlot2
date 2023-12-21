@@ -7,13 +7,14 @@ class PlayerMover : MonoBehaviour
     [SerializeField] Transform cameraTransform;
 
     [SerializeField] Damagable damagable;
+    [SerializeField] Animator animator;
 
     void OnValidate()
     {
+        if (animator == null)
+        { animator = GetComponent<Animator>(); }
         if(damagable == null) 
-        { 
-            damagable=GetComponent<Damagable>();
-        }
+        { damagable=GetComponent<Damagable>(); }
     }
     void Update()
     {
@@ -29,8 +30,11 @@ class PlayerMover : MonoBehaviour
         Vector3 inputVector = x * cameraRight + z * cameraForward;
         inputVector.y = 0;
 
-        if (inputVector != Vector3.zero)
+        bool isRunning = inputVector != Vector3.zero;
+        animator.SetBool("IsRunning", isRunning);
+        if (isRunning)
         {
+
             inputVector.Normalize();
             Vector3 velocity = inputVector * speed;
             transform.position += velocity * Time.deltaTime;
